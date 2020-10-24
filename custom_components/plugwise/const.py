@@ -195,16 +195,16 @@ AUX_DEV_SENSORS = {
     },
 }
 
-# Helper function for energy consts
-def _energySensor(*inputs):
+
+def _energy_sensor(*inputs):
     """Return standardized dict with energy description."""
     enabled_default = True
     unit_default = POWER_WATT
+    name_default = "Energy usage"
     if inputs:
+        name_default = inputs[0]
         if len(inputs) == 2:
             name_default, unit_default = inputs[0], inputs[1:]
-        else:
-            name_default = inputs[0]
 
     return {
         ATTR_DEVICE_CLASS: DEVICE_CLASS_POWER,
@@ -214,51 +214,52 @@ def _energySensor(*inputs):
         ATTR_UNIT_OF_MEASUREMENT: unit_default,
     }
 
+
 ENERGY_SENSORS = {
-    "electricity_consumed": _energySensor("Current Consumed Power"),
-     "electricity_produced": _energySensor("Current Produced Power"),
-     "electricity_consumed_interval": _energySensor(
-         "Consumed Power Interval", ENERGY_WATT_HOUR
-     ),
-     "electricity_consumed_peak_interval": _energySensor(
-         "Consumed Power Interval", ENERGY_WATT_HOUR
-     ),
-     "electricity_consumed_off_peak_interval": _energySensor(
-         "Consumed Power Interval (off peak)", ENERGY_WATT_HOUR
-     ),
-     "electricity_produced_interval": _energySensor(
-         "Produced Power Interval", ENERGY_WATT_HOUR
-     ),
-     "electricity_produced_peak_interval": _energySensor(
-         "Produced Power Interval", ENERGY_WATT_HOUR
-     ),
-     "electricity_produced_off_peak_interval": _energySensor(
-         "Produced Power Interval (off peak)", ENERGY_WATT_HOUR
-     ),
-     "electricity_consumed_off_peak_point": _energySensor(
-         "Current Consumed Power (off peak)"
-     ),
-     "electricity_consumed_peak_point": _energySensor("Current Consumed Power"),
-     "electricity_consumed_off_peak_cumulative": _energySensor(
-         "Cumulative Consumed Power (off peak)", ENERGY_KILO_WATT_HOUR
-     ),
-     "electricity_consumed_peak_cumulative": _energySensor(
-         "Cumulative Consumed Power", ENERGY_KILO_WATT_HOUR
-     ),
-     "electricity_produced_off_peak_point": _energySensor(
-         "Current Consumed Power (off peak)"
-     ),
-     "electricity_produced_peak_point": _energySensor("Current Consumed Power"),
-     "electricity_produced_off_peak_cumulative": _energySensor(
-         "Cumulative Consumed Power (off peak)", ENERGY_KILO_WATT_HOUR
-     ),
-     "electricity_produced_peak_cumulative": _energySensor(
-         "Cumulative Consumed Power", ENERGY_KILO_WATT_HOUR
-     ),
-    "net_electricity_point": _energySensor("Current net Power"),
-     "net_electricity_cumulative": _energySensor(
-         "Current net Power", ENERGY_KILO_WATT_HOUR
-     ),
+    "electricity_consumed": _energy_sensor("Current Consumed Power"),
+    "electricity_produced": _energy_sensor("Current Produced Power"),
+    "electricity_consumed_interval": _energy_sensor(
+        "Consumed Power Interval", ENERGY_WATT_HOUR
+    ),
+    "electricity_consumed_peak_interval": _energy_sensor(
+        "Consumed Power Interval", ENERGY_WATT_HOUR
+    ),
+    "electricity_consumed_off_peak_interval": _energy_sensor(
+        "Consumed Power Interval (off peak)", ENERGY_WATT_HOUR
+    ),
+    "electricity_produced_interval": _energy_sensor(
+        "Produced Power Interval", ENERGY_WATT_HOUR
+    ),
+    "electricity_produced_peak_interval": _energy_sensor(
+        "Produced Power Interval", ENERGY_WATT_HOUR
+    ),
+    "electricity_produced_off_peak_interval": _energy_sensor(
+        "Produced Power Interval (off peak)", ENERGY_WATT_HOUR
+    ),
+    "electricity_consumed_off_peak_point": _energy_sensor(
+        "Current Consumed Power (off peak)"
+    ),
+    "electricity_consumed_peak_point": _energy_sensor("Current Consumed Power"),
+    "electricity_consumed_off_peak_cumulative": _energy_sensor(
+        "Cumulative Consumed Power (off peak)", ENERGY_KILO_WATT_HOUR
+    ),
+    "electricity_consumed_peak_cumulative": _energy_sensor(
+        "Cumulative Consumed Power", ENERGY_KILO_WATT_HOUR
+    ),
+    "electricity_produced_off_peak_point": _energy_sensor(
+        "Current Consumed Power (off peak)"
+    ),
+    "electricity_produced_peak_point": _energy_sensor("Current Consumed Power"),
+    "electricity_produced_off_peak_cumulative": _energy_sensor(
+        "Cumulative Consumed Power (off peak)", ENERGY_KILO_WATT_HOUR
+    ),
+    "electricity_produced_peak_cumulative": _energy_sensor(
+        "Cumulative Consumed Power", ENERGY_KILO_WATT_HOUR
+    ),
+    "net_electricity_point": _energy_sensor("Current net Power"),
+    "net_electricity_cumulative": _energy_sensor(
+        "Current net Power", ENERGY_KILO_WATT_HOUR
+    ),
     "gas_consumed_interval": {
         ATTR_DEVICE_CLASS: None,
         ATTR_ENABLED_DEFAULT: True,
