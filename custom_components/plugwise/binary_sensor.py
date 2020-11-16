@@ -167,12 +167,13 @@ async def async_setup_entry_gateway(hass, config_entry, async_add_entities):
             _LOGGER.debug("Plugwise device_class %s found", devices[dev_id][PW_CLASS])
             entities.append(
                 GwNotifySensor(
-                    hass,
                     api,
                     coordinator,
                     devices[dev_id][ATTR_NAME],
                     dev_id,
+                    True,
                     "plugwise_notification",
+                    None,
                     devices[dev_id][PW_MODEL],
                 )
             )
@@ -258,9 +259,9 @@ class GwBinarySensor(SmileBinarySensor, BinarySensorEntity):
 class GwNotifySensor(SmileBinarySensor, BinarySensorEntity):
     """Representation of a Plugwise Notification binary_sensor."""
 
-    def __init__(self, api, coordinator, name, dev_id, enabled_default, binary_sensor, model):
+    def __init__(self, api, coordinator, name, dev_id, enabled_default, binary_sensor, key, model):
         """Set up the Plugwise API."""
-        super().__init__(api, coordinator, name, dev_id, enabled_default, binary_sensor, None, model)
+        super().__init__(api, coordinator, name, dev_id, enabled_default, binary_sensor, key, model)
 
         self._attributes = {}
         for severity in SEVERITIES:
