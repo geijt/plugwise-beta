@@ -197,6 +197,7 @@ class SmileBinarySensor(SmileGateway):
         self._icon = None
         self._is_on = False
         self._enabled_default = enabled_default
+        self._model = model
         self._name = key[ATTR_NAME] if key else None
 
         if dev_id == self._api.heater_id:
